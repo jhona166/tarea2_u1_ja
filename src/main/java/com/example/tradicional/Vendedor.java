@@ -11,4 +11,5 @@ public class Vendedor extends Persona {
 		this.codVend = codVend;
 	}	
 
+	
 }

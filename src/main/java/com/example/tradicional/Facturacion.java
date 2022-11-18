@@ -7,22 +7,48 @@ public class Facturacion {
 	private LocalDateTime fecha;
 	private Vendedor vendedor;
 	private Cliente cliente;
-	private Productos productos;
+	private Producto producto;
 	private double total;
+	private String tipo;
 	
-	
+	@Override
+	public String toString() {
+		return "Facturacion [id=" + id + ", fecha=" + fecha + ", vendedor=" + vendedor + ", cliente=" + cliente
+				+ ", producto=" + producto + ", total=" + total + ", tipo=" + tipo + "]";
+	}
+
 	public void Facturacion(int id, LocalDateTime fecha, String vendedor,
-			String cliente, String productos,double total) {
+			String cliente, String producto,double total,String tipo) {
 		
 		this.id = id;
 		this.fecha = LocalDateTime.now();
-		
 		this.total = total;
-		this.generarFactura(this);
-		
+		this.tipo = tipo;
 		Cliente clienteObjeto = new Cliente();
 		clienteObjeto.setNombre(cliente);
-		this.cliente = clienteObjeto;
+		Vendedor vendedorObjeto = new Vendedor();
+		vendedorObjeto.setNombre(vendedor);
+		Producto productoObjeto = new Producto();
+		productoObjeto.setNombre(producto);
+		
+		this.cliente =clienteObjeto;
+		this.vendedor = vendedorObjeto;
+		this.producto = productoObjeto;
+		
+		//Afiliado(AF),Fuerzas Armadas(FA)
+		if(tipo.equals("AF")) {
+			ClienteAfiliado clienteAF = new ClienteAfiliado();
+			clienteAF.setCodA("A231");
+			this.cliente = clienteAF;
+			System.out.println("Aplica descuento de Afiliado");
+			
+		}else {
+			ClienteFfaa clienteFA = new ClienteFfaa();
+			clienteFA.setCodFa("F521");
+			this.cliente = clienteFA;
+			System.out.println("Aplica descuento Fuerzas Armadas");
+		
+		}
 		
 		System.out.println("Se ha generado la Factura ");
 		this.generarFactura(this);
@@ -58,11 +84,11 @@ public class Facturacion {
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Productos getProductos() {
-		return productos;
+	public Producto getProducto() {
+		return producto;
 	}
-	public void setProductos(Productos productos) {
-		this.productos = productos;
+	public void setProducto(Producto producto) {
+		this.producto = producto;
 	}
 	
 	public double getTotal() {
@@ -75,11 +101,7 @@ public class Facturacion {
 	}
 
 	//ToString
-	@Override
-	public String toString() {
-		return "Facturacion [id=" + id + ", fecha=" + fecha + ", vendedor=" + vendedor + ", cliente=" + cliente
-				+ ", productos=" + productos + ", total=" + total + "]";
-	}
+	
 
 
 }

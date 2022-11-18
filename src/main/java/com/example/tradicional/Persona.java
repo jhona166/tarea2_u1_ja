@@ -1,8 +1,10 @@
 package com.example.tradicional;
 
 public class Persona {
+	
 	private int id;
 	private String nombre;
+	
 	private String cedula;
 	private String direccion;
 	private String telefono;
@@ -46,5 +48,8 @@ public class Persona {
 		this.email = email;
 	}
 
-	
+	@Override
+	public String toString() {
+		return nombre;
+	}
 }
